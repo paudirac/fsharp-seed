@@ -1,8 +1,6 @@
-run: Program.exe
-	mono Program.exe
+.PHONY: build
 
-Program.exe: Program.fs
-	fsharpc Program.fs
-
-clean:
-	rm Program.exe
+build:
+	mono /tools/.paket/paket.bootstraper.exe
+	mono /tools/.paket/paket.exe install
+	mono packages/FAKE/tools/FAKE.exe build.fsx

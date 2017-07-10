@@ -1,9 +1,15 @@
+IMAGE=fhsarp-seed
 SOURCE_DIR=$(shell echo `pwd`/src)
-run:
-	docker run -it -v ${SOURCE_DIR}:/src fsharp bash -c "cd /src; make run"
-
 build:
-	docker run -it -v ${SOURCE_DIR}:/src fsharp bash -c "cd /src; make Program.exe"
+	docker run -it -v ${SOURCE_DIR}:/src ${IMAGE} bash -c "cd /src; make build"
 
 clean:
-	docker run -it -v ${SOURCE_DIR}:/src fsharp bash -c "cd /src; make clean"
+	docker run -it -v ${SOURCE_DIR}:/src ${IMAGE} bash -c "cd /src; make clean"
+
+shell:
+	docker run -it --rm -v ${SOURCE_DIR}:/src ${IMAGE} bash
+
+create-image:
+	docker build -t ${IMAGE} -f Dockerfile .
+
+.PHONY: build clean shell create-image
