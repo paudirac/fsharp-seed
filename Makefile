@@ -6,8 +6,8 @@ build:
 clean:
 	docker run -it -v ${SOURCE_DIR}:/src ${IMAGE} bash -c "cd /src; make clean"
 
-shell:
-	docker run -it --rm -v ${SOURCE_DIR}:/src ${IMAGE} bash
+shell: create-image
+	docker run -it --rm -v ${SOURCE_DIR}:/src --net="host" ${IMAGE} bash
 
 create-image:
 	docker build -t ${IMAGE} -f Dockerfile .

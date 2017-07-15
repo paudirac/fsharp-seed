@@ -1,5 +1,0 @@
-*.exe
-.fake
-packages
-paket-files
-paket.lock
